@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/Login';
+import HomePage from './pages/Home';
+import { AuthContextProvider } from './store/auth-context';
+import AuthContext from './store/auth-context';
+import { useEffect, useState, useContext } from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <AppRoutes />
+    </AuthContextProvider>
+  );
+}
+
+function AppRoutes() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsAuthenticated(authCtx.isLoggedIn);
+  }, [authCtx.isLoggedIn]);
+
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            isAuthenticated ? (
+              <HomePage />
+            ) : (
+              <Navigate to="/login" replace={true} />
+            )
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </Router>
   );
 }
 
