@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import './Login.css';
 import axios from 'axios';
 import AuthContext from '../store/auth-context';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const Navigate = useNavigate();
@@ -12,6 +12,7 @@ export default function Login() {
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false); // state to toggle spinner display
+  const [isError, setIsError] = useState(false); // state to toggle error display
 
   const authCtx = useContext(AuthContext);
 
@@ -33,12 +34,14 @@ export default function Login() {
         }
       );
       if (response.status === 200) {
+        console.log(response.data);
         const token = response.data.token;
-        authCtx.onLogin(formdata.email, formdata.password, token); // update AuthContext with email, password and token values
+        authCtx.onLogin(formdata.email, formdata.password, token, response.data.authdata); // update AuthContext with email, password and token values
         Navigate('/');
       }
     } catch (error) {
       console.error(error);
+      setIsError(true);
     }
     setIsLoading(false);
   };
@@ -63,7 +66,6 @@ export default function Login() {
         <div className="LoginBox">
           <h1 id="login_heading">Login</h1>
           <br></br>
-          Current Auth state is: {authCtx.isLoggedIn.toString()}
           <form className="login_form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -101,19 +103,10 @@ export default function Login() {
               <span className="sr-only"></span>
             </div>
           )}
+          <br></br>
+          {isError && (<div class="alert alert-danger" role="alert">Please Check Your Email & Password
+          </div>)}
         </div>
-        {/* Bootstrap JS */}
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-          crossOrigin="anonymous"
-        ></link>
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-          crossOrigin="anonymous"
-        ></script>
       </div>
     </>
   );
