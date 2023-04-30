@@ -36,7 +36,7 @@ export default function Login() {
       if (response.status === 200) {
         console.log(response.data);
         const token = response.data.token;
-        authCtx.onLogin(formdata.email, formdata.password, token, response.data.authdata); // update AuthContext with email, password and token values
+        authCtx.onLogin(token, response.data.authdata); // update AuthContext with email, password and token values
         Navigate('/');
       }
     } catch (error) {
