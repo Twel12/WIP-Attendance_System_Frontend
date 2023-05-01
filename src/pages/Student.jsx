@@ -61,6 +61,7 @@ export default function Student() {
                         <th>Subject</th>
                         <th>Present Count</th>
                         <th>Absent Count</th>
+                        <th>Present Percentage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,7 @@ export default function Student() {
                             <td>{att._id}</td>
                             <td>{att.presentCount}</td>
                             <td>{att.absentCount}</td>
+                            <td>{att.presentCount/(att.presentCount+att.absentCount)*100}%</td>
                         </tr>
                     ))}
                 </tbody>

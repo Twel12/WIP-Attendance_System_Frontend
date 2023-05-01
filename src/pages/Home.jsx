@@ -11,14 +11,11 @@ export default function Home() {
     function handleLogout() {
         AuthCtx.onLogout();
     }
-    function consolelog() {
-        console.log(AuthCtx.data);
-    }
     return (
         <div className="Home">
+            <Header />
             {/* logout */}
             <button type="button" className="btn btn-primary" onClick={handleLogout}>Logout</button>
-            <button type="button" className="btn btn-primary" onClick={consolelog}>Console.log </button>
             <Student></Student>
         </div>
     );
