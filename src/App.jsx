@@ -4,6 +4,7 @@ import HomePage from './pages/Home';
 import { AuthContextProvider } from './store/auth-context';
 import AuthContext from './store/auth-context';
 import { useEffect, useState, useContext } from 'react';
+import Admin2 from './pages/AdminAdduser';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function AppRoutes() {
           }
         />
         <Route path="/login" element={<LoginPage />} />
+        {isAuthenticated && ((
+        <Route path="/admin/addsubject" element = {<Admin2/>}/>       ) 
+        )}
       </Routes>
     </Router>
   );

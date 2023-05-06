@@ -1,0 +1,16 @@
+import React from 'react';
+import AdminSidebar from '../components/AdminSidebar/AdminSidebar';
+import SignUpForm from '../components/AddUser/AddUser';
+import AddSubject from '../components/AddSubject/AddSubject';
+const Admin = () => {
+    return (
+        <div className="Admin">
+            <AdminSidebar />
+            <div style={{paddingLeft:"300px",paddingTop:"20px"}}>
+                <SignUpForm />
+                {/* <AddSubject /> */}
+            </div>
+        </div>
+    );
+}
+export default Admin;

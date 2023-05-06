@@ -25,6 +25,8 @@ export default function Student() {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [attendance, setAttendance] = useState([]);
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [dropdownData, setDropdownData] = useState([]);
 
     useEffect(() => {
         const loadAttendance = async () => {
@@ -44,6 +46,21 @@ export default function Student() {
         loadAttendance();
     }, [SysID]);
 
+    const handleCheckboxChange = async (rowId, subject) => {
+        if (rowId === selectedRow) {
+            setSelectedRow(null);
+        } else {
+            setSelectedRow(rowId);
+            try {
+                const response = await axios.get(`http://localhost:3001/attendance/${SysID}/${subject}`);
+                console.log(response.data);
+                setDropdownData(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -53,7 +70,7 @@ export default function Student() {
     }
 
     return (
-        <div className="Student">
+        <div className="Student" style={{paddingLeft:"10px",paddingTop:"10px",paddingRight:"10px"}}>
             <h1>Attendance Details</h1>
             <StyledTable>
                 <thead>
@@ -62,19 +79,46 @@ export default function Student() {
                         <th>Present Count</th>
                         <th>Absent Count</th>
                         <th>Present Percentage</th>
+                        <th>Get Detailed View</th>
                     </tr>
                 </thead>
                 <tbody>
                     {attendance.map((att) => (
-                        <tr key={att._id}>
-                            <td>{att._id}</td>
-                            <td>{att.presentCount}</td>
-                            <td>{att.absentCount}</td>
-                            <td>{att.presentCount/(att.presentCount+att.absentCount)*100}%</td>
-                        </tr>
+                        <React.Fragment key={att._id}>
+                            <tr className={selectedRow === att._id ? 'selected' : ''}>
+                                <td>{att._id}</td>
+                                <td>{att.presentCount}</td>
+                                <td>{att.absentCount}</td>
+                                <td>{att.presentCount/(att.presentCount+att.absentCount)*100}%</td>
+                                <td><input type="checkbox" checked={selectedRow === att._id} onChange={() => handleCheckboxChange(att._id, att._id)} /></td>
+                            </tr>
+                            {selectedRow === att._id && dropdownData && (
+                                <tr>
+                                    <td colSpan={5}>
+                                        <StyledTable>
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Attendance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {dropdownData.map((item) => (
+                                                    <tr key={item.date}>
+                                                        <td>{item.date}</td>
+                                                        <td>{item.attendance[0] ? 'Present' : 'Absent'}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </StyledTable>
+                                    </td>
+                                </tr>
+                            )}
+                        </React.Fragment>
                     ))}
                 </tbody>
             </StyledTable>
         </div>
     );
+    
 }
