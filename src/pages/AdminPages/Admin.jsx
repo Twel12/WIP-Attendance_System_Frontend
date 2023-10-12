@@ -1,6 +1,6 @@
 import React from 'react';
-import AdminSidebar from '../components/AdminSidebar/AdminSidebar';
-import SignUpForm from '../components/AddUser/AddUser';
+import AdminSidebar from '../../components/AdminSidebar/AdminSidebar';
+import SignUpForm from '../../components/AddUser/AddUser';
 
 const Admin = () => {
     return (

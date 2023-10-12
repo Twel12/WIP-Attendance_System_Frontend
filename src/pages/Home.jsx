@@ -1,6 +1,5 @@
 import {useContext,React} from 'react';
-import './Home.css';
-import Admin from './Admin';
+import Admin from './AdminPages/Admin';
 import Header from '../components/Header/Header';
 import Student from './Student';
 import Teacher from './Teacher';
@@ -11,7 +10,6 @@ export default function Home() {
     return (
         <div className="Home" >
             <Header />
-            {/* <Form /> */}
             {AuthCtx.data.isAdmin ? <Admin /> : AuthCtx.data.isTeacher ? <Teacher /> : <Student />}
         </div>
     );

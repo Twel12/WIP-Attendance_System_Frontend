@@ -4,7 +4,7 @@ import HomePage from './pages/Home';
 import { AuthContextProvider } from './store/auth-context';
 import AuthContext from './store/auth-context';
 import { useEffect, useState, useContext } from 'react';
-import Admin2 from './pages/AdminAddSubject';
+import Admin2 from './pages/AdminPages/AdminAddSubject';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import AdminSidebar from '../components/AdminSidebar/AdminSidebar';
-import AddSubject from '../components/AddSubject/AddSubject';
-import Header from '../components/Header/Header';
+import AdminSidebar from '../../components/AdminSidebar/AdminSidebar';
+import AddSubject from '../../components/AddSubject/AddSubject';
+import Header from '../../components/Header/Header';
 
 const Admin = () => {
     return (

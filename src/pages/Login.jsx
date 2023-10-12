@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from "react";
-import "./Login.css";
 import axios from "axios";
 import AuthContext from "../store/auth-context";
 import { useNavigate } from "react-router-dom";
@@ -83,51 +82,58 @@ export default function Login() {
         }}
       >
         <Box>
-        <h1 id="login_heading">Login</h1>
-        <br></br>
-        <form className="login_form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="form-control"
-            name="email"
-            placeholder="user email"
-            aria-label="user email"
-            onChange={handleChange}
-            value={formdata.email}
-          ></input>
+          <h1 style={{ backgroundColor: "#6D7275", color: "white" }}>Login</h1>
           <br></br>
-          <input
-            type={PasswordType}
-            className="form-control"
-            name="password"
-            placeholder="password"
-            aria-label="Password"
-            onChange={handleChange}
-            value={formdata.password}
-          ></input>
-          <br></br>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={PasswordToggle}
+          <form
+            className="login_form"
+            onSubmit={handleSubmit}
+            style={{
+              width: "400px",
+              backgroundColor: "#6D7275",
+            }}
           >
-            Toggle Password
-          </button>
-          <button type="submit" className="btn btn-light">
-            Login
-          </button>
-        </form>
-        {isLoading && ( // display spinner when isLoading is true
-          <Box className="spinner-border m-4" role="status">
-            <span className="sr-only"></span>
-          </Box>
-        )}
-        <br></br>
-        {isError && (
-          <Box class="alert alert-primary" role="alert">
-            Please Check Your Email & Password
-          </Box>
-        )}
+            <input
+              type="text"
+              className="form-control"
+              name="email"
+              placeholder="user email"
+              aria-label="user email"
+              onChange={handleChange}
+              value={formdata.email}
+            ></input>
+            <br></br>
+            <input
+              type={PasswordType}
+              className="form-control"
+              name="password"
+              placeholder="password"
+              aria-label="Password"
+              onChange={handleChange}
+              value={formdata.password}
+            ></input>
+            <br></br>
+            <button
+              type="button"
+              className="btn btn-light"
+              onClick={PasswordToggle}
+            >
+              Toggle Password
+            </button>
+            <button style={{marginLeft:"1rem"}} type="submit" className="btn btn-light">
+              Login
+            </button>
+          </form>
+          {isLoading && ( // display spinner when isLoading is true
+            <Box className="spinner-border m-4" role="status">
+              <span className="sr-only"></span>
+            </Box>
+          )}
+          <br></br>
+          {isError && (
+            <Box class="alert alert-primary" role="alert">
+              Please Check Your Email & Password
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Button,ButtonGroup } from 'react-bootstrap';
 import AuthContext from '../store/auth-context';
 
-import './Teacher.css'
 const Teacher = () => {
     const AuthCtx = useContext(AuthContext);
     const [subjectList, setSubjectList] = useState([]);
