@@ -2,7 +2,6 @@ import {useContext,React} from 'react';
 import './Home.css';
 import Admin from './Admin';
 import Header from '../components/Header/Header';
-import Form from '../components/Form/Form';
 import Student from './Student';
 import Teacher from './Teacher';
 import AuthContext from '../store/auth-context';

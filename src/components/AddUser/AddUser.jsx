@@ -140,7 +140,7 @@ const SignUpForm = () => {
             type="text"
             placeholder="Enter batch"
             name="isStudent.Batch"
-            value={formData.isStudent.Batch}
+            value={formData.isStudent.value.isBatch}
             onChange={handleChange}
             required
           />

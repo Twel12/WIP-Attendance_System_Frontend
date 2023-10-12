@@ -1,12 +1,15 @@
 import React from 'react';
 import AdminSidebar from '../components/AdminSidebar/AdminSidebar';
-import SignUpForm from '../components/AddUser/AddUser';
+import AddSubject from '../components/AddSubject/AddSubject';
+import Header from '../components/Header/Header';
+
 const Admin = () => {
     return (
         <div className="Admin">
+            <Header />
             <AdminSidebar />
             <div style={{paddingLeft:"300px",paddingTop:"20px"}}>
-                <SignUpForm />
+                <AddSubject />
             </div>
         </div>
     );

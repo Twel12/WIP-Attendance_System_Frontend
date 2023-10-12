@@ -1,8 +1,12 @@
 import axios from 'axios';
+import {useContext,React} from 'react';
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button,ButtonGroup } from 'react-bootstrap';
+import AuthContext from '../store/auth-context';
+
 import './Teacher.css'
 const Teacher = () => {
+    const AuthCtx = useContext(AuthContext);
     const [subjectList, setSubjectList] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState('');
     const [dateList, setDateList] = useState([]);
@@ -54,6 +58,15 @@ const Teacher = () => {
         }
     }
 
+    const handleSubjectClick = (subject) => {
+        setSelectedSubject(subject);
+        setSelectedDate('');
+    }
+
+    const handleDateClick = (date) => {
+        setSelectedDate(date);
+    }
+
     const handleDateChange = event => {
         setSelectedDate(event.target.value);
     }
@@ -72,30 +85,41 @@ const Teacher = () => {
 
     return (
         <div style={{ paddingLeft: "10px", paddingTop: "5px" }}>
-            <h1>Teacher Page</h1><br/>
-            <label htmlFor="subjects">Select Subject:</label>
-            <select id="subjects" onChange={handleSubjectChange} className="btn-primary dropdown-toggle">
-    <option value="">Select a Subject</option>
-    {subjectList.length > 0 && subjectList.map(subject => (
-        <option key={subject.name} value={subject.name}>{subject.name}</option>
-    ))}
-</select>
+        <h1>Welcome Back {AuthCtx.data.name}</h1><br/>
+        <div>
+            <label>Select Subject:</label>
+            <ButtonGroup>
+                {subjectList.map(subject => (
+                    <Button
+                        key={subject.name}
+                        variant={subject.name === selectedSubject ? 'primary' : 'secondary'}
+                        onClick={() => handleSubjectClick(subject.name)}
+                    >
+                        {subject.name}
+                    </Button>
+                ))}
+            </ButtonGroup>
+        </div>
 
-            {selectedSubject && (
-                <div>
-                    <br />
-                    <label htmlFor="dates">Select Date:</label>
-                    <select id="dates" onChange={handleDateChange} className="btn-primary dropdown-toggle">
-    <option value="">Select a Date</option>
-    {dateList.length > 0 && dateList.map(date => (
-        <option key={date} value={date}>{date}</option>
-    ))}
-</select>
+        {selectedSubject && (
+            <div>
+                <br />
+                <label>Select Date:</label>
+                <ButtonGroup>
+                    {dateList.map(date => (
+                        <Button
+                            key={date}
+                            variant={date === selectedDate ? 'primary' : 'secondary'}
+                            onClick={() => handleDateClick(date)}
+                        >
+                            {date}
+                        </Button>
+                    ))}
+                </ButtonGroup>
 
-                    <Button variant="primary" onClick={handleAttendanceClick}>Get Attendance</Button>
-                </div>
-            )}
-            {selectedDate && <p>You have selected {selectedDate}.</p>}
+                <Button variant="primary" onClick={handleAttendanceClick}>Get Attendance</Button>
+            </div>
+        )}
             {attendanceData.length > 0 && (
                 
                 <table class="table">

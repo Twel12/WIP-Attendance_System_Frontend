@@ -1,16 +1,17 @@
 import { React, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './AdminSidebar.css';
-import SignUpForm from '../AddUser/AddUser';
+import { NavLink } from 'react-router-dom';
 
 const AdminSidebar = () => {
   const AuthCtx = useContext(AuthContext);
   function handleLogout() {
     AuthCtx.onLogout();
   }
+
   const name = AuthCtx.data.name;
   return (<div>
-    <div className="sidebar" style={{ position: "absolute",display: "block" }}>
+    <div className="sidebar" style={{ position: "absolute" ,height:"93.4%",display: "block" }}>
     <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="description" content />
@@ -68,44 +69,20 @@ const AdminSidebar = () => {
           <hr />
           <ul className="nav nav-pills flex-column mb-auto">
             <li className="nav-item">
-              <a href="/" className="nav-link active" aria-current="page">
-                <svg className="bi pe-none me-2" width={16} height={16}>
+              <NavLink to="/" className="nav-link text-white" aria-current="page" >
+              <svg className="bi pe-none me-2" width={16} height={16}>
                   <use xlinkHref="#home" />
                 </svg>
                 Add User
-              </a>
+                </NavLink>
             </li>
-            {/* <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi pe-none me-2" width={16} height={16}>
-                  <use xlinkHref="#speedometer2" />
-                </svg>
-                Dashboard
-              </a>
-            </li> */}
-            {/* <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi pe-none me-2" width={16} height={16}>
-                  <use xlinkHref="#table" />
-                </svg>
-                Orders
-              </a>
-            </li> */}
             <li>
-              <a href="/admin/addsubject" className="nav-link text-white">
+            <NavLink to="/admin/addsubject" className="nav-link text-white" aria-current="page" >
                 <svg className="bi pe-none me-2" width={16} height={16}>
                   <use xlinkHref="#grid" />
                 </svg>
                 Add Course
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi pe-none me-2" width={16} height={16}>
-                  <use xlinkHref="#people-circle" />
-                </svg>
-                Add User
-              </a>
+              </NavLink>
             </li>
           </ul>
           <hr />

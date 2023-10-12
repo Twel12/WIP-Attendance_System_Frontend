@@ -1,22 +1,11 @@
 .login_form{
   width: 400px;
-  background-color: #f7f0f0;
-}
-
-.LoginBox {
-  margin-top: 200px;
-  padding-top: 50px;
-  padding-left:50px;
-  padding-right:50px;
-  padding-bottom: 50px;
-  background-color: #f7f0f0;
-  margin-left:100px;
-  width: 700px;
-
+  background-color: #6D7275;
 }
 
 #login_heading{
-  background-color: #f7f0f0;
+  background-color: #6D7275;
+  color:white;
 }
 
 .btn{
