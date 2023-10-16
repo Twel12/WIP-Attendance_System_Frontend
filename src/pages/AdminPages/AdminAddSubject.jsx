@@ -6,7 +6,6 @@ import Header from '../../components/Header/Header';
 const Admin = () => {
     return (
         <div className="Admin">
-            <Header />
             <AdminSidebar />
             <div style={{paddingLeft:"300px",paddingTop:"20px"}}>
                 <AddSubject />

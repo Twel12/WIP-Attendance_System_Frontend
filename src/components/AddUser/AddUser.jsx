@@ -28,7 +28,6 @@ const SignUpForm = () => {
     const { name, checked } = e.target;
     let value = checked;
 
-    // Ensure only one checkbox is ticked at a time
     if (name === 'isStudent.value') {
       setFormData((prevState) => ({
         ...prevState,

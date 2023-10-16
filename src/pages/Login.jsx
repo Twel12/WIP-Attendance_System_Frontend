@@ -33,7 +33,7 @@ export default function Login() {
       if (response.status === 200) {
         console.log(response.data);
         const token = response.data.token;
-        authCtx.onLogin(token, response.data.authdata); // update AuthContext with email, password and token values
+        authCtx.onLogin(token, response.data.responsedata); // update AuthContext with email, password and token values
         Navigate("/");
       }
     } catch (error) {
@@ -119,7 +119,11 @@ export default function Login() {
             >
               Toggle Password
             </button>
-            <button style={{marginLeft:"1rem"}} type="submit" className="btn btn-light">
+            <button
+              style={{ marginLeft: "1rem" }}
+              type="submit"
+              className="btn btn-light"
+            >
               Login
             </button>
           </form>

@@ -1,15 +1,16 @@
 import React from 'react';
 import AdminSidebar from '../../components/AdminSidebar/AdminSidebar';
 import SignUpForm from '../../components/AddUser/AddUser';
+import { Box } from '@mui/material';
 
 const Admin = () => {
     return (
-        <div className="Admin">
+        <Box className="Admin">
             <AdminSidebar />
-            <div style={{paddingLeft:"300px",paddingTop:"20px"}}>
+            <Box style={{paddingLeft:"300px",paddingTop:"20px"}}>
                 <SignUpForm />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }
 export default Admin;
